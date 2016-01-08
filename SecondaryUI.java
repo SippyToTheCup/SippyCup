@@ -212,7 +212,7 @@ public class SecondaryUI extends javax.swing.JFrame {
 
             processedFileNo = 1;
             try {
-                BufferedImage processedImage = ImageIO.read(new File("processed" + processedFileNo + ".jpg"));
+                BufferedImage processedImage = ImageIO.read(new File("processed_images/processed" + processedFileNo + ".jpg"));
 
                 processedImageLabel.setIcon(new ImageIcon(processedImage));
 
@@ -233,7 +233,7 @@ public class SecondaryUI extends javax.swing.JFrame {
             BufferedImage processedImage;
             try {
                 processedFileNo++;
-                processedImage = ImageIO.read(new File("processed" + processedFileNo + ".jpg"));
+                processedImage = ImageIO.read(new File("processed_images/processed" + processedFileNo + ".jpg"));
                 processedImageLabel.setIcon(new ImageIcon(processedImage));
                 prevButton.setEnabled(true);
             } catch (IOException ex) {
@@ -253,7 +253,7 @@ public class SecondaryUI extends javax.swing.JFrame {
             BufferedImage processedImage;
             try {
                 processedFileNo--;
-                processedImage = ImageIO.read(new File("processed" + processedFileNo + ".jpg"));
+                processedImage = ImageIO.read(new File("processed_images/processed" + processedFileNo + ".jpg"));
                 processedImageLabel.setIcon(new ImageIcon(processedImage));
 
                 nextButton.setEnabled(true);
