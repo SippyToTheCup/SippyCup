@@ -1,5 +1,3 @@
-
-
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.image.BufferedImage;
@@ -37,7 +35,7 @@ public class Images extends JFrame {
         //  JPanel panel = new JPanel();
         //  panel.setBackground(Color.RED);
         // panel.setBorder(new EmptyBorder(5,25,5,25));
-        
+
         // add image labels
         olabel = new JLabel(new ImageIcon(origi));
         olabel.addNotify();
@@ -94,7 +92,7 @@ public class Images extends JFrame {
         // this.add(olabel);
     }
 
-    
+
     // reset the frame to the new images and counter
     void reset(BufferedImage img, BufferedImage proc, int count) {
         olabel.setIcon(new ImageIcon(img));

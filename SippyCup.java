@@ -1,5 +1,3 @@
-//package capstoneproject;
-
 import java.awt.Graphics;
 import java.awt.Window;
 import java.io.IOException;
@@ -11,11 +9,7 @@ import java.io.FileWriter;
 import java.util.LinkedList;
 import javax.swing.*;
 
-/**
- *
- * @author Niel
- */
-public class CapstoneProject extends JFrame {
+public class SippyCup extends JFrame {
 
     private static File test = new File("newfile.txt");                         // file for writing tests
     private static BufferedWriter write;
@@ -34,31 +28,34 @@ public class CapstoneProject extends JFrame {
 
             // initialise variables
             BufferedImage img;
-            String fileName = args[0];
+            String fileName = "raw_images/testseq00000.gif";
             File imageFile = new File(fileName);
             counter = 0;
             imageFileNo = 1;
+            // create processed_images directory
+            new File("processed_images").mkdirs();
 
             // read the image from the file
             img = ImageIO.read(imageFile);
- 
+
             // first iteration of images
             firstIteration(img);
-            
+
             // initialise the jframe
             Images imagesFrame = new Images (ImageIO.read(imageFile), img, counter);
 
             // build the name of the next file (could use a regex)
-            fileName = fileName.substring(0, (fileName.length() - 5) - (int) Math.log10(imageFileNo)) + imageFileNo + ".gif";
+            fileName = fileName.substring(0, (fileName.length() - 5) -
+                    (int) Math.log10(imageFileNo)) + imageFileNo + ".gif";
             imageFile = new File(fileName);
             int halfWidth = imageMatrix[0].length;
 
             // read the rest of the images
-            while (imageFile.exists()) {    
+            while (imageFile.exists()) {
                 long imagestart = System.currentTimeMillis();
                 shapes = new LinkedList();
                 img = ImageIO.read(imageFile);
-                
+
                 // write image to matrix in 1s and 0s
                 imageMatrix = new int[img.getHeight()][halfWidth];
                 buildMatrix(img);
@@ -108,14 +105,14 @@ public class CapstoneProject extends JFrame {
                         img.setRGB(pixels[1], pixels[0], 0);
                     }
                 }
-                
+
                 // reset the jframe with the new images and counter
-                imagesFrame.reset(ImageIO.read(imageFile), img, counter);               
+                imagesFrame.reset(ImageIO.read(imageFile), img, counter);
                 imagesFrame.repaint();
 
 
                 // write the modified image to disk
-                ImageIO.write(img, "gif", new File("proccessed" + imageFileNo + ".gif"));
+                ImageIO.write(img, "gif", new File("processed_images/proccessed" + imageFileNo + ".gif"));
 
                 System.out.println("Image " + imageFileNo + ": " + (double) (System.currentTimeMillis() - imagestart) / 1000 + " seconds");
 
@@ -198,7 +195,7 @@ public class CapstoneProject extends JFrame {
                     shapes.getLast().addPixel(pixel);
                 }
 
-                // if the previous pixel was the last in the sequence 
+                // if the previous pixel was the last in the sequence
             } else if (strip[i - 1] == 0) {
                 // and if this is not the first strip
                 if (x > 0 && shapes.size() > 0) {
@@ -217,7 +214,7 @@ public class CapstoneProject extends JFrame {
 
         // run through shapes and keep a list of adjacent shapes
         for (int i = 0; i < shapes.size() - 1; i++) {
-            if (shapes.get(i).allign(last, x)) {
+            if (shapes.get(i).align(last, x)) {
                 adjacent.add(shapes.get(i));
                 alligned = true;
             }
@@ -257,7 +254,7 @@ public class CapstoneProject extends JFrame {
                     lastShapes.getLast().addPixel(pixel);
                 }
 
-                // if the previous pixel was the last in the sequence 
+                // if the previous pixel was the last in the sequence
             } else if (strip[i - 1] == 0) {
                 // and if this is not the first strip
                 if (lastShapes.size() > 0) {
@@ -276,13 +273,13 @@ public class CapstoneProject extends JFrame {
 
         // run through shapes and keep a list of adjacent shapes
         for (int i = 0; i < shapes.size(); i++) {
-            if (shapes.get(i).allign(last, x)) {
+            if (shapes.get(i).align(last, x)) {
                 adjacent.add(shapes.get(i));
                 alligned = true;
             }
         }
 
-        // if there are any shapes that allign
+        // if there are any shapes that align
         // compose the whole list into one shape
 //        if (alligned) {
 //            Shape newShape = new Shape();
@@ -290,7 +287,7 @@ public class CapstoneProject extends JFrame {
 //            // and remove the old shapes
 //            for (Shape s : adjacent) {
 //                newShape.append(s);
-//                
+//
 //            }
 //            newShape.append(last);
 //            incompleteShapes.add(newShape);
@@ -304,7 +301,7 @@ public class CapstoneProject extends JFrame {
 
     }
 
-    
+
     // runs the detection of the first image
     private static void firstIteration(BufferedImage img) {
         long imagestart = System.currentTimeMillis();
@@ -350,7 +347,7 @@ public class CapstoneProject extends JFrame {
 
         try {
             // write the modified image to disk
-            ImageIO.write(img, "gif", new File("proccessed0.gif"));
+            ImageIO.write(img, "gif", new File("processed_images/proccessed0.gif"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }

@@ -1,0 +1,5 @@
+*.class
+*~
+raw_images/
+processed_images/
+*.gif

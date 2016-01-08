@@ -1,5 +1,3 @@
-
-
 import java.util.LinkedList;
 
 /**
@@ -14,7 +12,7 @@ public class Shape implements Comparable {
     public Shape(int[] pixel) {
         pixellist = new LinkedList();
         pixellist.add(pixel);
-        //name = n; 
+        //name = n;
     }
 
     Shape() {
@@ -34,7 +32,7 @@ public class Shape implements Comparable {
         return contains;
     }
 
-    
+
     // test if the pixel is part of this shape
     public boolean sameShape(int[] pixel) {
         boolean same = false;
@@ -130,9 +128,9 @@ public class Shape implements Comparable {
 //        boolean same
 //    }
 
-    
+
     // test if this strip shape alligns with the current shape
-    public boolean allign(Shape last, int x) {
+    public boolean align(Shape last, int x) {
         boolean alligned = false;
         for (int[] i : last.pixellist) {
             int y = i[0];
@@ -151,7 +149,7 @@ public class Shape implements Comparable {
         this.pixellist.addAll(last.pixellist);
     }
 
-    
+
     // testing if the shapes are exactly the same
     public boolean doubleCounting(Shape s) {
         boolean dcount = false;
@@ -223,16 +221,16 @@ public class Shape implements Comparable {
 //            }
 //
 //        }
-//        
-//        
-//        
+//
+//
+//
 //        if (!xInRange){
 //                equals =1;
-//               
+//
 //            }
-     
 
-        
+
+
         for (int i = 0; i < this.pixellist.size(); i++) {
             try {
                 // test if the shapes are in the same y-range
